@@ -4,9 +4,14 @@ import { useRouter } from 'vue-router'
 import {
   FileText,
   FileUp,
+  LockKeyhole,
   Paperclip,
   Send,
-  X
+  ShieldCheck,
+  Sparkles,
+  TicketCheck,
+  X,
+  Zap
 } from 'lucide-vue-next'
 import AppShell from '../components/AppShell.vue'
 import { useSupportStore } from '../stores/support'
@@ -82,136 +87,238 @@ async function submit() {
 
 <template>
   <AppShell>
-    <main class="page narrow">
-      <section class="hero">
+    <main class="page create-page-v2">
+      <section class="create-page-head">
         <div>
           <p class="eyebrow">NEW SUPPORT REQUEST</p>
           <h1>Create a ticket</h1>
           <p>
-            Ticket data is stored in DynamoDB and attachments upload
-            directly to private Amazon S3 storage.
+            Tell us what happened. Ticket data is stored in DynamoDB and
+            attachments upload securely to private Amazon S3 storage.
           </p>
+        </div>
+
+        <div class="create-head-badge">
+          <ShieldCheck :size="16" />
+          <span>
+            <strong>Secure by design</strong>
+            <small>Cognito + private S3</small>
+          </span>
         </div>
       </section>
 
-      <form class="card form-card" @submit.prevent="submit">
-        <div class="form-body">
-          <label class="field">
-            <span>Title *</span>
-            <input
-              v-model="form.title"
-              placeholder="Short summary of the issue"
-            />
-          </label>
+      <section class="create-layout">
+        <form class="card form-card create-main-card" @submit.prevent="submit">
+          <div class="form-body">
+            <div class="create-section-label">
+              <span>01</span>
+              <div>
+                <strong>Describe the issue</strong>
+                <small>Give your support request a clear title and description.</small>
+              </div>
+            </div>
 
-          <label class="field">
-            <span>Description *</span>
-            <textarea
-              v-model="form.description"
-              rows="7"
-              placeholder="Describe what happened and what you expected..."
-            ></textarea>
-          </label>
-
-          <div class="two">
             <label class="field">
-              <span>Priority</span>
-              <select v-model="form.priority">
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
-                <option>Urgent</option>
-              </select>
+              <span>Title *</span>
+              <input
+                v-model="form.title"
+                placeholder="Short summary of the issue"
+              />
             </label>
 
             <label class="field">
-              <span>Category</span>
-              <select v-model="form.category">
-                <option>Technical</option>
-                <option>Billing</option>
-                <option>Account</option>
-                <option>General</option>
-                <option>Other</option>
-              </select>
+              <span>Description *</span>
+              <textarea
+                v-model="form.description"
+                rows="7"
+                placeholder="Describe what happened and what you expected..."
+              ></textarea>
             </label>
-          </div>
 
-          <button
-            v-if="!form.file"
-            type="button"
-            class="upload"
-            @click="fileInput.click()"
-          >
-            <FileUp :size="22" />
-            <strong>Choose attachment</strong>
-            <span>
-              Upload directly to private S3 storage · Maximum 10 MB
-            </span>
-          </button>
+            <div class="create-section-label second">
+              <span>02</span>
+              <div>
+                <strong>Classify the request</strong>
+                <small>Help the support team understand urgency and category.</small>
+              </div>
+            </div>
 
-          <div v-else class="selected-file">
-            <span class="selected-file-icon">
-              <FileText :size="18" />
-            </span>
+            <div class="two">
+              <label class="field">
+                <span>Priority</span>
+                <select v-model="form.priority">
+                  <option>Low</option>
+                  <option>Medium</option>
+                  <option>High</option>
+                  <option>Urgent</option>
+                </select>
+              </label>
 
-            <span class="selected-file-copy">
-              <strong>{{ form.file.name }}</strong>
-              <small>
-                {{ formatBytes(form.file.size) }}
-                · {{ form.file.type || 'application/octet-stream' }}
-              </small>
-            </span>
+              <label class="field">
+                <span>Category</span>
+                <select v-model="form.category">
+                  <option>Technical</option>
+                  <option>Billing</option>
+                  <option>Account</option>
+                  <option>General</option>
+                  <option>Other</option>
+                </select>
+              </label>
+            </div>
 
-            <span class="s3-ready">
-              <Paperclip :size="13" />
-              Ready for S3
-            </span>
+            <div class="create-section-label second">
+              <span>03</span>
+              <div>
+                <strong>Add supporting evidence</strong>
+                <small>Optional — attach an image, PDF or log file up to 10 MB.</small>
+              </div>
+            </div>
 
             <button
+              v-if="!form.file"
               type="button"
-              class="remove-file"
-              title="Remove attachment"
-              @click="removeFile"
+              class="upload create-upload"
+              @click="fileInput.click()"
             >
-              <X :size="15" />
+              <span class="upload-visual">
+                <FileUp :size="24" />
+              </span>
+              <strong>Choose attachment</strong>
+              <span>Upload directly to private S3 storage · Maximum 10 MB</span>
+            </button>
+
+            <div v-else class="selected-file">
+              <span class="selected-file-icon">
+                <FileText :size="18" />
+              </span>
+
+              <span class="selected-file-copy">
+                <strong>{{ form.file.name }}</strong>
+                <small>
+                  {{ formatBytes(form.file.size) }}
+                  · {{ form.file.type || 'application/octet-stream' }}
+                </small>
+              </span>
+
+              <span class="s3-ready">
+                <Paperclip :size="13" />
+                Ready for S3
+              </span>
+
+              <button
+                type="button"
+                class="remove-file"
+                title="Remove attachment"
+                @click="removeFile"
+              >
+                <X :size="15" />
+              </button>
+            </div>
+
+            <input
+              ref="fileInput"
+              type="file"
+              hidden
+              @change="chooseFile"
+            />
+
+            <div v-if="store.uploadStage" class="upload-progress">
+              <i></i>
+              <span>{{ store.uploadStage }}</span>
+            </div>
+
+            <p v-if="error" class="error">{{ error }}</p>
+          </div>
+
+          <div class="form-foot create-form-foot">
+            <button
+              type="button"
+              class="btn secondary"
+              :disabled="store.saving"
+              @click="router.push('/tickets')"
+            >
+              Cancel
+            </button>
+
+            <button
+              class="btn primary"
+              type="submit"
+              :disabled="store.saving"
+            >
+              <Send :size="14" />
+              {{ store.saving ? 'Please wait…' : 'Create ticket' }}
             </button>
           </div>
+        </form>
 
-          <input
-            ref="fileInput"
-            type="file"
-            hidden
-            @change="chooseFile"
-          />
+        <aside class="create-side">
+          <article class="card create-floating-card create-preview-card">
+            <span class="create-side-icon green">
+              <TicketCheck :size="19" />
+            </span>
+            <p class="eyebrow">TICKET PREVIEW</p>
+            <h2>{{ form.title || 'Your ticket title' }}</h2>
+            <p>
+              {{ form.description || 'Your description will appear here as you type.' }}
+            </p>
 
-          <div v-if="store.uploadStage" class="upload-progress">
-            <i></i>
-            <span>{{ store.uploadStage }}</span>
-          </div>
+            <div class="create-preview-meta">
+              <div>
+                <span>Priority</span>
+                <strong>{{ form.priority }}</strong>
+              </div>
+              <div>
+                <span>Category</span>
+                <strong>{{ form.category }}</strong>
+              </div>
+              <div>
+                <span>Attachment</span>
+                <strong>{{ form.file ? '1 file' : 'None' }}</strong>
+              </div>
+            </div>
+          </article>
 
-          <p v-if="error" class="error">{{ error }}</p>
-        </div>
+          <article class="card create-floating-card">
+            <span class="create-side-icon cyan">
+              <Zap :size="19" />
+            </span>
+            <h3>What happens next?</h3>
 
-        <div class="form-foot">
-          <button
-            type="button"
-            class="btn secondary"
-            :disabled="store.saving"
-            @click="router.push('/tickets')"
-          >
-            Cancel
-          </button>
+            <div class="create-step">
+              <span>1</span>
+              <div>
+                <strong>Ticket is created</strong>
+                <small>Your request is saved in DynamoDB.</small>
+              </div>
+            </div>
 
-          <button
-            class="btn primary"
-            type="submit"
-            :disabled="store.saving"
-          >
-            <Send :size="14" />
-            {{ store.saving ? 'Please wait…' : 'Create ticket' }}
-          </button>
-        </div>
-      </form>
+            <div class="create-step">
+              <span>2</span>
+              <div>
+                <strong>Agent reviews it</strong>
+                <small>An Agent can assign and update the request.</small>
+              </div>
+            </div>
+
+            <div class="create-step">
+              <span>3</span>
+              <div>
+                <strong>You track progress</strong>
+                <small>Comments and activity remain visible on the ticket.</small>
+              </div>
+            </div>
+          </article>
+
+          <article class="card create-floating-card create-security-card">
+            <LockKeyhole :size="16" />
+            <div>
+              <strong>Private attachment storage</strong>
+              <small>Files use short-lived S3 presigned URLs.</small>
+            </div>
+            <Sparkles :size="15" />
+          </article>
+        </aside>
+      </section>
     </main>
   </AppShell>
 </template>

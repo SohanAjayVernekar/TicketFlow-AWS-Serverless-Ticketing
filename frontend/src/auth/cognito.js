@@ -36,7 +36,7 @@ if (cognitoConfigured) {
   })
 }
 
-export async function signIn(expectedRole = 'Customer', redirectTo = '/') {
+export async function signIn(expectedRole = 'Customer', redirectTo = '/dashboard') {
   if (!manager) throw new Error('Cognito is not configured.')
 
   sessionStorage.setItem('ticketflow.expectedRole', expectedRole)
@@ -50,7 +50,7 @@ export async function signIn(expectedRole = 'Customer', redirectTo = '/') {
   })
 }
 
-export async function startCustomerSignup(redirectTo = '/') {
+export async function startCustomerSignup(redirectTo = '/dashboard') {
   // Start a valid OIDC/PKCE flow first. On Cognito's hosted page,
   // click "Sign up" to create the customer account.
   // This avoids bypassing oidc-client's stored state/PKCE verifier.
@@ -113,7 +113,7 @@ export async function signOut() {
 }
 
 export function takePostLoginRedirect() {
-  const target = sessionStorage.getItem('ticketflow.redirectAfterLogin') || '/'
+  const target = sessionStorage.getItem('ticketflow.redirectAfterLogin') || '/dashboard'
   sessionStorage.removeItem('ticketflow.redirectAfterLogin')
   return target
 }

@@ -23,7 +23,7 @@ const busy = ref('')
 const error = ref('')
 
 const redirectTo = computed(() =>
-  typeof route.query.redirect === 'string' ? route.query.redirect : '/'
+  typeof route.query.redirect === 'string' ? route.query.redirect : '/dashboard'
 )
 
 onMounted(() => {
@@ -62,7 +62,7 @@ async function signup() {
   watchdog('signup')
 
   try {
-    await startCustomerSignup('/')
+    await startCustomerSignup('/dashboard')
   } catch (e) {
     error.value = e?.message || 'Unable to open Cognito.'
     busy.value = ''

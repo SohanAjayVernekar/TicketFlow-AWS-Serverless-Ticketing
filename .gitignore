@@ -25,3 +25,7 @@ frontend/.patch-backups/
 *.pem
 *.key
 credentials
+
+# Development patch artifacts
+patch/
+scripts/apply-*.sh

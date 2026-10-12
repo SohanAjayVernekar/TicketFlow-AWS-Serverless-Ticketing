@@ -88,11 +88,16 @@ async function logout() {
 </script>
 
 <template>
-  <div class="app-bg">
-    <div class="app-frame">
-      <header class="topbar">
+  <div class="app-bg workspace-animated">
+    <div class="workspace-noise"></div>
+    <div class="ws-orb ws-orb-a"></div>
+    <div class="ws-orb ws-orb-b"></div>
+    <div class="ws-orb ws-orb-c"></div>
+
+    <div class="app-frame glass-frame">
+      <header class="topbar elevated-topbar">
         <div class="top-left">
-          <RouterLink to="/" class="logo">
+          <RouterLink to="/dashboard" class="logo">
             <Zap :size="18" />
           </RouterLink>
 
@@ -110,7 +115,7 @@ async function logout() {
 
         <nav class="main-nav">
           <RouterLink
-            to="/"
+            to="/dashboard"
             :class="{ active: route.name === 'dashboard' }"
           >
             <LayoutDashboard :size="16" />
@@ -135,7 +140,7 @@ async function logout() {
         </nav>
 
         <div class="actions">
-          <form class="top-search" @submit.prevent="submitSearch">
+          <form class="top-search glass-search" @submit.prevent="submitSearch">
             <Search :size="15" />
             <input
               v-model="search"
@@ -147,13 +152,13 @@ async function logout() {
 
           <div class="pop-wrap">
             <button
-              class="icon-btn"
+              class="icon-btn glass-icon-btn"
               @click="showBell = !showBell; showProfile = false"
             >
               <Bell :size="16" />
             </button>
 
-            <div v-if="showBell" class="popover">
+            <div v-if="showBell" class="popover floating-popover">
               <h4>Notifications</h4>
               <button
                 v-for="alert in alerts"
@@ -167,13 +172,13 @@ async function logout() {
 
           <div class="pop-wrap">
             <button
-              class="avatar"
+              class="avatar floating-avatar"
               @click="showProfile = !showProfile; showBell = false"
             >
               {{ initials || 'U' }}
             </button>
 
-            <div v-if="showProfile" class="popover profile">
+            <div v-if="showProfile" class="popover profile floating-popover">
               <strong>{{ authIdentity.name }}</strong>
               <span>{{ authIdentity.email }}</span>
               <em>{{ store.role }} access</em>
@@ -185,7 +190,9 @@ async function logout() {
         </div>
       </header>
 
-      <slot />
+      <div class="workspace-shell">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
