@@ -80,11 +80,19 @@ cd "$FRONTEND"
 npm ci
 npm run build
 
+# mktemp creates an empty file. `zip` treats an existing empty file as a broken ZIP,
+# so create a temporary name and remove it before writing the archive.
 DEPLOY_ZIP="$(mktemp --suffix=.zip)"
+rm -f "$DEPLOY_ZIP"
 (
   cd "$FRONTEND/dist"
   zip -qr "$DEPLOY_ZIP" .
 )
+
+if [ ! -s "$DEPLOY_ZIP" ]; then
+  echo "ERROR: Deployment ZIP was not created."
+  exit 1
+fi
 
 echo "Creating Amplify deployment..."
 DEPLOY_JSON="$(aws amplify create-deployment \
@@ -120,6 +128,7 @@ aws amplify start-deployment \
 
 echo "Deployment started: job $JOB_ID"
 
+STATUS="PENDING"
 for attempt in $(seq 1 60); do
   STATUS="$(aws amplify get-job \
     --region "$REGION" \
