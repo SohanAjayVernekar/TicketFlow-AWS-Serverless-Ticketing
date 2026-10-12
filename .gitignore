@@ -1,0 +1,27 @@
+
+# Environment / AWS local configuration
+frontend/.env.local
+.env
+.env.local
+.cognito-resource-ids
+.backend-resource-ids
+
+# Dependencies / builds
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist-submission/
+
+# Local backups
+.patch-backups/
+frontend/.patch-backups/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Credentials / keys
+*.pem
+*.key
+credentials

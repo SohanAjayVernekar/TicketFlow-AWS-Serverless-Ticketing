@@ -1,0 +1,120 @@
+
+/* ============================================================
+   Distinct Agent + Customer dashboards
+   ============================================================ */
+.role-dashboard{padding-top:34px}
+.role-kicker{width:max-content;display:flex;align-items:center;gap:6px;font-size:9px;font-weight:700;letter-spacing:.14em;margin-bottom:9px}
+.agent-kicker{color:var(--green)}
+.customer-kicker{color:#5ed5e7}
+.agent-hero,.customer-hero{border:1px solid var(--border);border-radius:13px;background:linear-gradient(135deg,#101614,#0c1110);margin-bottom:10px}
+.agent-hero{min-height:150px;padding:25px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.agent-hero h1,.customer-hero h1{margin:0;font-size:27px;letter-spacing:-.04em}
+.agent-hero p,.customer-hero p{max-width:700px;color:#7c8782;font-size:10px;line-height:1.7;margin:8px 0 0}
+.hero-actions,.customer-hero-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+.agent-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+.agent-metric{min-height:112px;padding:15px;border-radius:11px;text-align:left;cursor:pointer;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;color:inherit}
+.agent-metric:hover,.customer-stat:hover{background:#151b18;border-color:#2b3732}
+.metric-icon,.customer-stat-icon{width:34px;height:34px;border-radius:9px;display:grid;place-items:center}
+.metric-icon.green,.customer-stat-icon.green{color:var(--green);background:rgba(49,230,176,.09)}
+.metric-icon.cyan,.customer-stat-icon.cyan{color:var(--cyan);background:rgba(67,207,224,.09)}
+.metric-icon.amber,.customer-stat-icon.amber{color:var(--amber);background:rgba(240,169,62,.09)}
+.metric-icon.muted-icon,.customer-stat-icon.muted-icon{color:#92a09a;background:rgba(255,255,255,.045)}
+.agent-metric>div{display:grid;gap:3px}
+.agent-metric small{color:#75807b;font-size:8px}
+.agent-metric strong{font-size:24px;letter-spacing:-.04em}
+.agent-metric em{font-style:normal;color:#606b66;font-size:8px}
+
+.agent-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:10px;margin-bottom:10px}
+.queue-health,.attention-card{min-height:300px}
+.role-card-head{min-height:58px;padding:0 16px;border-bottom:1px solid rgba(255,255,255,.035);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.role-card-head h2{margin:0;font-size:11px}
+.role-card-head p{margin:4px 0 0;color:#64706b;font-size:8px}
+.role-card-head>a{display:flex;align-items:center;gap:5px;color:#65dfb7;text-decoration:none;font-size:9px}
+
+.agent-status-list{display:grid;gap:18px;padding:25px 20px}
+.agent-status-list>div{display:grid;grid-template-columns:85px 1fr 24px;align-items:center;gap:10px;color:#8c9792;font-size:9px}
+.agent-status-list i{height:7px;border-radius:99px;background:#19201d;overflow:hidden}
+.agent-status-list b{display:block;height:100%;border-radius:99px}
+.bar-open{background:var(--green)}.bar-progress{background:var(--cyan)}.bar-pending{background:var(--amber)}.bar-resolved{background:#71807a}
+.agent-status-list strong{font-size:9px;color:#d7dfdc}
+
+.attention-card{padding-bottom:10px}
+.attention-item{width:calc(100% - 24px);margin:8px 12px 0;padding:10px 11px;min-height:58px;border:1px solid #232b28;border-radius:9px;background:#0e1210;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;text-align:left;cursor:pointer}
+.attention-item:hover{background:#151a18}
+.attention-icon{width:29px;height:29px;border-radius:8px;display:grid;place-items:center}
+.attention-icon.amber{color:var(--amber);background:rgba(240,169,62,.09)}
+.attention-icon.pink{color:var(--pink);background:rgba(236,85,127,.09)}
+.attention-icon.cyan{color:var(--cyan);background:rgba(67,207,224,.09)}
+.attention-item>span:nth-child(2){display:grid;gap:3px}
+.attention-item strong{font-size:9px}
+.attention-item small{color:#65706b;font-size:8px}
+.attention-item>b{font-size:18px}
+
+.role-table-card{overflow:hidden}
+.role-table-grid{grid-template-columns:1.8fr .72fr .68fr 1fr .9fr}
+
+/* Customer dashboard */
+.customer-hero{min-height:245px;padding:28px;display:grid;grid-template-columns:1.45fr .75fr;align-items:center;gap:24px;overflow:hidden;position:relative}
+.customer-hero:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-80px;top:-120px;background:radial-gradient(circle,rgba(67,207,224,.11),transparent 67%)}
+.customer-hero-copy{position:relative;z-index:2}
+.customer-hero-actions{margin-top:21px}
+.customer-main-cta{min-width:145px}
+.customer-hero-visual{height:190px;position:relative;display:grid;place-items:center}
+.support-ring{position:absolute;border-radius:50%;border:1px solid rgba(49,230,176,.12)}
+.ring-one{width:175px;height:175px}
+.ring-two{width:125px;height:125px;border-color:rgba(67,207,224,.18)}
+.support-center{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;align-content:center;gap:4px;background:#111916;border:1px solid #2b3934;box-shadow:0 0 50px rgba(49,230,176,.08);color:var(--green);position:relative;z-index:2}
+.support-center strong{font-size:10px;color:#dce4e0}
+.support-center span{font-size:7px;color:#66716c}
+
+.customer-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+.customer-stat{min-height:94px;padding:14px;text-decoration:none;display:flex;align-items:center;gap:12px}
+.customer-stat>div{display:grid;gap:3px}
+.customer-stat strong{font-size:21px}
+.customer-stat span{color:#7e8984;font-size:9px}
+
+.customer-grid{display:grid;grid-template-columns:1.4fr .75fr;gap:10px}
+.customer-recent,.customer-help{min-height:330px}
+.customer-ticket{width:100%;min-height:67px;padding:10px 14px;border:0;border-bottom:1px solid rgba(255,255,255,.03);background:transparent;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:11px;text-align:left;cursor:pointer}
+.customer-ticket:hover{background:#141917}
+.customer-ticket-icon{width:30px;height:30px;border-radius:8px;background:rgba(49,230,176,.07);color:var(--green);display:grid;place-items:center}
+.customer-ticket-copy{display:grid;gap:3px;min-width:0}
+.customer-ticket-copy small{color:#606b66;font-size:7px}
+.customer-ticket-copy strong{font-size:10px;color:#e4e9e7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.customer-ticket-copy em{font-style:normal;color:#6f7a75;font-size:8px}
+.customer-ticket-arrow{color:#505b56}
+.customer-empty{padding:38px 24px;text-align:center;display:grid;justify-items:center;gap:8px}
+.customer-empty-icon{width:52px;height:52px;border-radius:14px;background:rgba(49,230,176,.07);color:var(--green);display:grid;place-items:center;margin-bottom:4px}
+.customer-empty strong{font-size:11px}
+.customer-empty p{max-width:390px;margin:0 0 7px;color:#6f7975;font-size:9px;line-height:1.6}
+
+.customer-help{padding-bottom:14px}
+.help-step{display:grid;grid-template-columns:27px 1fr;gap:10px;padding:15px 16px 0}
+.help-step>span{width:27px;height:27px;border-radius:8px;background:#151c19;border:1px solid #27332e;color:var(--green);display:grid;place-items:center;font-size:9px;font-weight:700}
+.help-step>div{display:grid;gap:4px}
+.help-step strong{font-size:9px}
+.help-step p{margin:0;color:#68736e;font-size:8px;line-height:1.55}
+.customer-help-link{margin:20px 16px 0;min-height:38px;border:1px solid #24302b;border-radius:8px;background:#0e1311;color:#63dcb5;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:5px;font-size:8px}
+
+.agent-role-badge{color:#61ddb8}
+.customer-role-badge{color:#64d1df}
+
+@media(max-width:1050px){
+  .agent-metrics,.customer-metrics{grid-template-columns:repeat(2,1fr)}
+  .agent-grid,.customer-grid{grid-template-columns:1fr}
+  .customer-hero{grid-template-columns:1fr .55fr}
+}
+@media(max-width:720px){
+  .agent-hero{align-items:flex-start;flex-direction:column}
+  .customer-hero{grid-template-columns:1fr;padding:22px}
+  .customer-hero-visual{display:none}
+  .agent-metrics,.customer-metrics{grid-template-columns:1fr 1fr}
+  .role-table-grid{grid-template-columns:1.7fr .75fr .7fr}
+  .role-table-grid>*:nth-child(4),.role-table-grid>*:nth-child(5){display:none}
+  .customer-ticket{grid-template-columns:auto 1fr auto}
+  .customer-ticket .customer-ticket-arrow{display:none}
+}
+@media(max-width:480px){
+  .agent-metrics,.customer-metrics{grid-template-columns:1fr}
+}

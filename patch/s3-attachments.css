@@ -1,0 +1,18 @@
+
+/* S3 attachment stage */
+.selected-file{min-height:72px;padding:10px 11px;border:1px solid #28342f;border-radius:9px;background:#0e1411;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:10px}
+.selected-file-icon,.attachment-file-icon{width:34px;height:34px;border-radius:8px;background:rgba(49,230,176,.08);color:var(--green);display:grid;place-items:center}
+.selected-file-copy{display:grid;gap:3px;min-width:0}
+.selected-file-copy strong{font-size:9px;color:#dce4e0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.selected-file-copy small{font-size:8px;color:#68746f}
+.s3-ready{display:flex;align-items:center;gap:5px;color:#63dcb6;font-size:8px}
+.remove-file{width:29px;height:29px;border:1px solid #29332f;border-radius:8px;background:#121816;color:#77827d;display:grid;place-items:center;cursor:pointer}
+.remove-file:hover{color:#f17d9d;border-color:rgba(236,85,127,.24)}
+.upload-progress{margin-top:10px;padding:10px;border:1px solid rgba(49,230,176,.18);border-radius:8px;background:rgba(49,230,176,.055);display:flex;align-items:center;gap:9px;color:#76e5c1;font-size:9px}
+.upload-progress i{width:13px;height:13px;border-radius:50%;border:2px solid rgba(49,230,176,.25);border-top-color:var(--green);animation:s3-spin .8s linear infinite}
+@keyframes s3-spin{to{transform:rotate(360deg)}}
+.s3-attachment{grid-template-columns:auto 1fr auto;color:inherit}
+.download-attachment{min-height:31px;padding:0 9px;border:1px solid #2b3833!important;border-radius:8px!important;background:#121916!important;color:#66dfb8!important;display:flex!important;align-items:center!important;gap:5px!important}
+.download-attachment:hover{background:#17211d!important}
+.download-attachment:disabled{opacity:.6;cursor:wait}
+@media(max-width:650px){.selected-file{grid-template-columns:auto 1fr auto}.s3-ready{display:none}.s3-attachment{grid-template-columns:auto 1fr}.s3-attachment .download-attachment{grid-column:1/-1;justify-self:start}}
