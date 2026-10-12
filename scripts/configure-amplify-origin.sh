@@ -37,13 +37,17 @@ LOGOUT_LOCAL="http://localhost:5173/login"
 CALLBACK_AWS="$ORIGIN/auth/callback"
 LOGOUT_AWS="$ORIGIN/login"
 
-printf '\n[1/3] Updating Cognito callback/sign-out URLs...\n'
+printf '\n[1/3] Updating Cognito callback/sign-out URLs and OAuth settings...\n'
 aws cognito-idp update-user-pool-client \
   --region "$REGION" \
   --user-pool-id "$COGNITO_USER_POOL_ID" \
   --client-id "$COGNITO_CLIENT_ID" \
+  --supported-identity-providers COGNITO \
   --callback-urls "$CALLBACK_LOCAL" "$CALLBACK_AWS" \
   --logout-urls "$LOGOUT_LOCAL" "$LOGOUT_AWS" \
+  --allowed-o-auth-flows code \
+  --allowed-o-auth-scopes openid email profile \
+  --allowed-o-auth-flows-user-pool-client \
   >/dev/null
 
 printf '[2/3] Updating API Gateway CORS...\n'
@@ -86,8 +90,7 @@ EOF
 aws s3api put-bucket-cors \
   --region "$REGION" \
   --bucket "$BUCKET" \
-  --cors-configuration "file://$S3_CORS" \
-  >/dev/null
+  --cors-configuration "file://$S3_CORS" >/dev/null
 rm -f "$S3_CORS"
 
 cat <<EOF
