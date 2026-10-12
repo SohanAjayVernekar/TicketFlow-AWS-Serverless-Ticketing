@@ -130,7 +130,7 @@ async function logout() {
             <span>{{ store.role === 'Agent' ? 'All tickets' : 'My tickets' }}</span>
           </RouterLink>
 
-          <RouterLink
+          <RouterLink v-if="store.role === 'Customer'"
             to="/tickets/new"
             :class="{ active: route.name === 'ticket-create' }"
           >

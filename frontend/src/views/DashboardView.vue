@@ -91,7 +91,7 @@ const statusWidth = (count) => `${Math.max(8, (count / total.value) * 100)}%`
             <RouterLink class="btn secondary" to="/tickets">
               <Inbox :size="15" /> Open queue
             </RouterLink>
-            <RouterLink class="btn primary" to="/tickets/new">
+            <RouterLink v-if="store.role === 'Customer'" class="btn primary" to="/tickets/new">
               <Plus :size="15" /> Create ticket
             </RouterLink>
           </div>
@@ -297,7 +297,7 @@ const statusWidth = (count) => `${Math.max(8, (count / total.value) * 100)}%`
             </p>
 
             <div class="customer-hero-actions">
-              <RouterLink class="btn primary customer-main-cta" to="/tickets/new">
+              <RouterLink v-if="store.role === 'Customer'" class="btn primary customer-main-cta" to="/tickets/new">
                 <Plus :size="15" /> Create support ticket
               </RouterLink>
               <RouterLink class="btn secondary" to="/tickets">
@@ -413,7 +413,7 @@ const statusWidth = (count) => `${Math.max(8, (count / total.value) * 100)}%`
               </span>
               <strong>You don’t have any support tickets yet.</strong>
               <p>Create your first ticket and our support team can start helping you.</p>
-              <RouterLink class="btn primary" to="/tickets/new">
+              <RouterLink v-if="store.role === 'Customer'" class="btn primary" to="/tickets/new">
                 <Plus :size="14" /> Create ticket
               </RouterLink>
             </div>
@@ -451,7 +451,7 @@ const statusWidth = (count) => `${Math.max(8, (count / total.value) * 100)}%`
               </div>
             </div>
 
-            <RouterLink class="customer-help-link" to="/tickets/new">
+            <RouterLink v-if="store.role === 'Customer'" class="customer-help-link" to="/tickets/new">
               Need help now? Create a ticket <ArrowRight :size="13" />
             </RouterLink>
           </aside>

@@ -6,7 +6,7 @@ import DashboardView from '../views/DashboardView.vue'
 import TicketsView from '../views/TicketsView.vue'
 import CreateTicketView from '../views/CreateTicketView.vue'
 import TicketDetailView from '../views/TicketDetailView.vue'
-import { getAuthUser } from '../auth/cognito'
+import { getAuthUser, getRole } from '../auth/cognito'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -63,6 +63,12 @@ router.beforeEach(async (to) => {
         name: 'login',
         query: { redirect: to.fullPath },
       }
+    }
+
+
+    // AGENT_CREATE_ROUTE_GUARD
+    if (to.path === '/tickets/new' && getRole(user) === 'Agent') {
+      return { name: 'tickets' }
     }
 
     return true
